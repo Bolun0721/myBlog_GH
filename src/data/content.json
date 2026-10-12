@@ -28,13 +28,13 @@
   "musicCovers": [
     {
       "id": "cover-kon",
-      "src": "/myBlog_GH/images/kon1.png",
+      "src": "/myBlog_GH/images/kon1.webp",
       "alt": "Kon 封面",
       "note": "《轻音少女》是由山田尚子执导、京都动画制作的校园音乐题材电视动画"
     },
     {
       "id": "cover-touhong",
-      "src": "/myBlog_GH/images/touhong1.png",
+      "src": "/myBlog_GH/images/touhong1.webp",
       "alt": "透红 封面",
       "note": "莲子与玛艾露贝莉·赫恩一同经营着名为秘封俱乐部的社团，进行着在科学世纪探寻遍布四处的结界的活动"
     },
@@ -46,7 +46,7 @@
     },
     {
       "id": "cover-mili",
-      "src": "/myBlog_GH/images/Mili1.png",
+      "src": "/myBlog_GH/images/Mili1.webp",
       "alt": "Mili 封面",
       "note": "可以以后再说SAIKAI"
     }
