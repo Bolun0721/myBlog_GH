@@ -53,20 +53,12 @@
   ],
   "tracks": [
     {
-      "id": "the-des-alizes",
-      "title": "The des Alizes",
-      "artist": "Foxtail-Grass Studio",
-      "src": "/myBlog_GH/audio/the-des-alizes.mp3",
-      "format": "MP3",
-      "sizeMB": 3.5
-    },
-    {
       "id": "track-muljf3uw-2-9mc5x",
       "title": "Winter night in a warm room",
       "artist": "百石元",
       "src": "/myBlog_GH/audio/Winter night in a warm room.mp3",
       "format": "MP3",
-      "sizeMB": 3
+      "sizeMB": 0.7
     }
   ],
   "projects": [
