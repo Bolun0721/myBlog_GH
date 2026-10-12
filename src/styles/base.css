@@ -1,0 +1,305 @@
+/**
+ * 基础层：字体声明 + 现代 reset + 排版基线
+ * 只放全站级规则，组件样式一律写在各组件内。
+ */
+
+/* 像素字体：拉丁字形，只用于标题/数字等展示场景 */
+@font-face {
+  font-family: 'pixl';
+  /* WOFF2 由原始 TTF 无损转换而来：1138KB -> 36KB */
+  src: url('../assets/fonts/10Pixel-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  /* 显式声明只覆盖拉丁字形：中文字符会直接跳到下一个字体，省去无谓的字形查找 */
+  unicode-range: U+0020-007E, U+00A0-00FF, U+2010-2027, U+2030-205E;
+}
+
+/* 隶行体：中文展示字形 */
+@font-face {
+  font-family: 'YuFanLixing';
+  /* 原始 OTF：1160KB -> 526KB */
+  src: url('../assets/fonts/YuFanLixing.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+figure,
+blockquote,
+dl,
+dd,
+ul,
+ol {
+  margin: 0;
+}
+
+ul,
+ol {
+  padding: 0;
+  list-style: none;
+}
+
+/* 画布底色放在根元素上。
+   放在 body 上也能生效，但那条路依赖「根元素背景透明时 body 背景被传播到画布」
+   这条容易踩坑的规则 —— 一旦以后给 html 补了背景，z-index:-1 的背景层就会被盖住。
+   放 html 上则是根元素背景直接成为画布，背景层稳定地压在它之上。 */
+html {
+  background-color: var(--c-paper);
+  /* 声明为浅色配色：表单控件、滚动条、以及画布兜底色都跟随浅色主题 */
+  color-scheme: light;
+}
+
+body {
+  min-height: 100vh;
+  color: var(--c-ink);
+  font-family: var(--font-body);
+  font-size: var(--fs-base);
+  line-height: var(--lh-normal);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+img,
+picture,
+svg,
+video,
+canvas {
+  display: block;
+  max-width: 100%;
+}
+
+/* 图片未加载完成前保持占位比例，避免布局跳动（CLS） */
+img {
+  height: auto;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+/* 只在键盘导航时显示焦点环 */
+:focus-visible {
+  outline: var(--border-thick) solid var(--c-focus);
+  outline-offset: 3px;
+}
+
+/* 视觉隐藏但对读屏可见 */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* 统一的展示型标题 */
+.display {
+  font-family: var(--font-display);
+  font-weight: 400;
+  line-height: var(--lh-tight);
+  letter-spacing: var(--ls-tight);
+}
+
+/* 跳转到主内容，键盘用户可见 */
+.skip-link {
+  position: absolute;
+  top: var(--sp-3);
+  left: var(--sp-3);
+  z-index: calc(var(--z-header) + 1);
+  padding: var(--sp-2) var(--sp-4);
+  background-color: var(--c-ink);
+  color: var(--c-inverse);
+  border-radius: var(--radius-sm);
+  transform: translateY(-200%);
+}
+
+.skip-link:focus-visible {
+  transform: translateY(0);
+}
+
+/* 路由切换过渡：定义在全局，因为过渡类作用在子视图的根元素上，
+   布局组件的 scoped 样式作用域覆盖不到它。 */
+.page-enter-active,
+.page-leave-active {
+  transition:
+    opacity var(--dur-base) var(--ease-out),
+    transform var(--dur-base) var(--ease-out);
+}
+
+.page-enter-from {
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+.page-leave-to {
+  opacity: 0;
+  transform: translateY(-8px);
+}
+
+/* ---------- 背景层：全屏铺图 + 浅色蒙层 ----------
+   用 <img> 而不是 CSS background-image：这样能拿到 load 事件做淡入，
+   且只有一次请求（CSS 背景图无法感知加载完成，硬切会很突兀）。
+   z-index: -1 让它在所有内容之下，但仍盖在画布底色之上。 */
+.app-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  /* 不设底色：画布底色由 html 提供，这一层只负责铺图。
+     也不需要 overflow: hidden —— 里面的图片就是 100%×100%，
+     object-fit: cover 的裁剪由图片自己完成。 */
+}
+
+.app-bg__img {
+  width: 100%;
+  height: 100%;
+  /* 等价于 background-size: cover + center：等比铺满、居中裁剪 */
+  object-fit: cover;
+  object-position: center;
+  opacity: 0;
+  transition: opacity var(--dur-slow) var(--ease-out);
+}
+
+.app-bg__img.is-ready {
+  opacity: 1;
+}
+
+/* 蒙层单独一层，方便独立调节强度而不影响图片本身的填充方式 */
+.app-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-color: var(--bg-wash);
+}
+
+/* ---------- 毛玻璃工具类 ----------
+   分两级，避免在组件里重复抄写三层配方：
+     .glass       只有「玻璃材质」（半透明底 + 模糊），边框圆角由使用方自己定
+     .glass-card  材质 + 高光描边 + 大圆角 + 投影，用于成块的卡片
+
+   两个使用原则：
+
+   一、只用在「面积大但数量少」的容器上（栏位卡片、页头页脚）。
+   长列表的每一行不要加 backdrop-filter：每个都是独立合成层，滚动会明显掉帧，
+   那种场景用半透明底色（var(--glass-soft)）就够，视觉差异很小。
+
+   二、小控件（导航按钮、图标按钮、播放药丸）不要用。
+   它们用的是接近实的 --glass-strong（78% 白），透过它几乎看不出模糊，
+   却要各自多占一层独立合成。面积换不来观感的开销，去掉即可。
+
+   需要更实的底时，在使用方用 scoped 样式覆盖 background-color: var(--glass-strong)
+   —— 作用域选择器权重更高，能稳定覆盖。 */
+.glass,
+.glass-card {
+  background-color: var(--glass-base);
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+}
+
+.glass-card {
+  border: 1px solid var(--glass-line);
+  border-radius: var(--radius-card);
+  box-shadow: var(--glass-shadow);
+}
+
+/* 不支持 backdrop-filter 时换成够实的底，否则文字压在照片上读不清 */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .glass,
+  .glass-card {
+    background-color: var(--glass-fallback);
+  }
+}
+
+/* 系统开启「降低透明度」时同样退化为实心，优先保证可读与性能 */
+@media (prefers-reduced-transparency: reduce) {
+  .glass,
+  .glass-card {
+    background-color: var(--glass-fallback);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}
+
+/* ---------- 卡片入场：进入页面时上浮逐个出现 ----------
+   --stagger 由组件按条目下标给出行内值，这里只负责把间隔乘出来。
+   用 backwards 而不是 both：动画结束后元素回到自然状态，不在每个卡片上
+   留下常驻的 transform（那会让每个卡片都多出一个层叠上下文）。 */
+@keyframes card-rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.rise-in {
+  animation: card-rise 520ms var(--ease-out) backwards;
+  animation-delay: calc(var(--stagger, 0) * 70ms);
+}
+
+/* ---------- 视图容器：纵向等距排列毛玻璃卡片 ----------
+   卡片之间的间距统一由父容器给，卡片组件自己不需要知道是第几块。 */
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-6);
+}
+
+@media (max-width: 640px) {
+  .stack {
+    gap: var(--sp-5);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  /* 入场动画直接不播，元素停在自然状态（可见、无位移） */
+  .rise-in {
+    animation: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -1,0 +1,6 @@
+/**
+ * 全局样式入口
+ * 顺序不可调换：tokens 定义变量 → base 消费变量。
+ */
+@import './tokens.css';
+@import './base.css';

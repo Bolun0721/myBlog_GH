@@ -1,0 +1,119 @@
+/**
+ * 设计令牌（Design Tokens）
+ * 全站唯一的视觉真源：颜色、字体、间距、圆角、阴影、动效。
+ * 组件内禁止再硬编码这些数值，一律引用变量。
+ */
+
+:root {
+  /* ---------- 色彩：保留原有像素／二次元黑白调，扩展为可用的灰阶体系 ---------- */
+  --c-paper: #ffffff;
+  --c-ink: #111111;
+  --c-ink-soft: #333333;
+  /* 正文里的次要文字。比纯白底时压深了一档：
+     现在文字常压在毛玻璃上，最坏情况底下是深色照片，太浅会过不了对比度。 */
+  --c-ink-muted: #5f5f5f;
+  --c-line: #111111;
+  --c-line-soft: #e2e2e4;
+  --c-inverse: #ffffff;
+  --c-focus: #111111;
+
+  /* ---------- 字体 ---------- */
+  /* 拉丁字形走像素字体，中文字形自动回退到隶行体；两者都是项目自带字体 */
+  --font-display: 'pixl', 'YuFanLixing', ui-monospace, 'Courier New', monospace;
+  /* 正文改用系统字体栈：零额外下载，中文小字号可读性远好于隶行体 */
+  --font-body: system-ui, -apple-system, 'Segoe UI', 'Microsoft YaHei', 'PingFang SC',
+    'Hiragino Sans GB', sans-serif;
+
+  --fs-xs: 0.75rem;
+  --fs-sm: 0.875rem;
+  --fs-base: 1rem;
+  --fs-md: 1.125rem;
+  --fs-lg: 1.375rem;
+  --fs-xl: 1.75rem;
+  --fs-2xl: 2.25rem;
+  --fs-3xl: 3rem;
+  --fs-4xl: 4rem;
+
+  --lh-tight: 1.15; /* 展示型大标题 */
+  --lh-snug: 1.5; /* 小字号的多行短文，如简介卡 */
+  --lh-normal: 1.7; /* 正文 */
+
+  --ls-tight: 0.02em;
+  --ls-wide: 0.12em;
+
+  /* ---------- 间距节奏（4px 基准） ---------- */
+  --sp-1: 0.25rem;
+  --sp-2: 0.5rem;
+  --sp-3: 0.75rem;
+  --sp-4: 1rem;
+  --sp-5: 1.5rem;
+  --sp-6: 2rem;
+  --sp-7: 3rem;
+  --sp-8: 4rem;
+
+  /* ---------- 形状 ---------- */
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-card: 22px;
+  --radius-card-sm: 14px;
+  --radius-pill: 999px;
+
+  /* 简介卡固定高度 = 上下内边距 + 3 行小字，约为原来单行时的两倍。
+     用 calc 而不是写死 px：用户调大浏览器字号时，卡高跟着文字一起长大。 */
+  --note-height: calc(var(--sp-2) * 2 + 3 * var(--lh-snug) * var(--fs-sm));
+
+  --border-hair: 2px;
+  --border-thick: 3px;
+
+  /* ---------- 毛玻璃「玻璃纱窗」 ----------
+   * 三层配方缺一不可（见毛玻璃实现文档）：
+   *   ① 半透明底（--glass-*）决定玻璃的明暗与透度
+   *   ② backdrop-filter: blur() + saturate() 模糊身后内容，并补偿模糊造成的发灰
+   *   ③ 高光描边（--glass-line）给磨砂质感一个干净边缘
+   * 本站是黑白调，用浅色玻璃 + 深色文字，而不是文档示例里的深色玻璃 + 白字。
+   * 想调效果只改这里：模糊强度、透明度、描边都在这一处。 */
+  --glass-blur: 12px;
+  --glass-saturate: 1.35;
+  --glass-strong: rgba(255, 255, 255, 0.78); /* 小控件、简介卡：近实的底，不配模糊也够看 */
+  /* 卡片底色。0.56 是「更透」与「次要文字仍过 AA 对比度」之间的平衡点：
+     再往下压，压在深色照片上时 #5f5f5f 的次要文字就会低于 4.5:1。 */
+  --glass-base: rgba(255, 255, 255, 0.56);
+  --glass-soft: rgba(255, 255, 255, 0.38); /* 图片底座、hover 底 */
+  --glass-line: rgba(255, 255, 255, 0.6); /* 高光描边 */
+  --glass-line-soft: rgba(255, 255, 255, 0.34);
+  --glass-shadow: 0 18px 48px rgba(15, 23, 42, 0.22);
+  --glass-shadow-sm: 0 6px 20px rgba(15, 23, 42, 0.14);
+  /* 不支持 backdrop-filter 时的替代底色：必须够实，否则文字压在照片上读不清 */
+  --glass-fallback: rgba(255, 255, 255, 0.92);
+
+  /* 背景图之上的浅色蒙层：压低照片对比度，让深色正文在任何图上都可读 */
+  --bg-wash: rgba(255, 255, 255, 0.66);
+
+  /* ---------- 动效 ---------- */
+  --dur-fast: 0.16s;
+  --dur-base: 0.28s;
+  --dur-slow: 0.55s;
+  --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-in-out: cubic-bezier(0.6, 0, 0.2, 1);
+  /* 峰值 1.45 超出 [0,1] 区间，曲线会过冲，末尾带一点回弹。
+     用于 3D 斜侧卡片转正：纯匀速会显得很"塑料"。 */
+  --ease-spring: cubic-bezier(0.34, 1.45, 0.64, 1);
+
+  /* ---------- 布局 ---------- */
+  --container: 1180px;
+  --gutter: var(--sp-5);
+  --header-h: 68px;
+
+  /* ---------- 层级 ---------- */
+  --z-header: 100;
+  --z-float: 90;
+}
+
+@media (max-width: 640px) {
+  :root {
+    --gutter: var(--sp-4);
+    --header-h: 60px;
+    --fs-3xl: 2.25rem;
+    --fs-4xl: 2.75rem;
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "name": "time-cat-blog-static",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Time Cat 静态展示版（GitHub Pages）。由 my-blog/scripts/sync-static.mjs 生成，请勿手工编辑。",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "dompurify": "^3.4.16",
+    "marked": "^18.1.0",
+    "matter-js": "^0.20.0",
+    "pinia": "^4.0.3",
+    "vue": "^3.5.43",
+    "vue-router": "^5.3.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^6.0.9",
+    "vite": "^8.3.0"
+  }
+}

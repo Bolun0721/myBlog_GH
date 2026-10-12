@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex" />
+    <title>Time Cat · 时之猫</title>
+    <script>
+      /*
+       * GitHub Pages 深层链接兜底页。
+       *
+       * 本站是单页应用，用 history 路由。直接访问 /music 这类深层路径时，
+       * GitHub Pages 找不到对应文件，就会返回这个 404 页面。
+       *
+       * 这里把原始路径改写成一个带 ?/ 前缀的查询串跳回首页，
+       * 首页的 index.html 里有一段配套脚本会把它还原成真实路径交给前端路由。
+       * 例：/myBlog_GH/music  →  /myBlog_GH/?/music
+       *
+       * pathSegmentsToKeep = 1：项目站点部署在 /仓库名/ 下，
+       * 改写时必须保留第一段路径（仓库名），否则跳转目标会跑到别人的站点上。
+       */
+      ;(function () {
+        var pathSegmentsToKeep = 1
+        var l = window.location
+        l.replace(
+          l.protocol +
+            '//' +
+            l.hostname +
+            (l.port ? ':' + l.port : '') +
+            l.pathname
+              .split('/')
+              .slice(0, 1 + pathSegmentsToKeep)
+              .join('/') +
+            '/?/' +
+            l.pathname
+              .slice(1)
+              .split('/')
+              .slice(pathSegmentsToKeep)
+              .join('/')
+              .replace(/&/g, '~and~') +
+            (l.search ? '&' + l.search.slice(1).replace(/&/g, '~and~') : '') +
+            l.hash
+        )
+      })()
+    </script>
+  </head>
+  <body>
+    <p>正在跳转…</p>
+  </body>
+</html>

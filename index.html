@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="/myBlog_GH/images/niro1.png" />
+    <title>Time Cat · 时之猫</title>
+    <meta name="description" content="Time Cat 个人小屋：画集、音乐盒与照片墙。" />
+    <meta name="theme-color" content="#ffffff" />
+      <script>
+      /*
+       * GitHub Pages 深层链接兜底的另一半（配套 public/404.html）。
+       * 用户直接访问 /music 这类路径时，GitHub Pages 返回 404.html，
+       * 那个页面把它改写成 /?/music 跳回首页；这里把路径还原回去，
+       * 再交给前端路由处理，浏览器地址栏最终显示的是原始的干净地址。
+       */
+      ;(function (location) {
+        if (location.search[1] !== '/') return
+        var decoded = location.search
+          .slice(1)
+          .split('&')
+          .map(function (part) {
+            return part.replace(/~and~/g, '&')
+          })
+          .join('?')
+        window.history.replaceState(null, null, location.pathname.slice(0, -1) + decoded + location.hash)
+      })(window.location)
+    </script>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

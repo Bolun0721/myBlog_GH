@@ -1,0 +1,140 @@
+{
+  "draw": [
+    {
+      "id": "draw-m3",
+      "src": "/myBlog_GH/images/M3.png",
+      "alt": "M3 立绘",
+      "note": "Mon3tr，在生命科学、矿石病诊疗、历史系谱学等诸多领域具备渊博学识"
+    },
+    {
+      "id": "draw-xiaoyang",
+      "src": "/myBlog_GH/images/xiaoyang1.png",
+      "alt": "小阳 立绘",
+      "note": "艾雅法拉，火山学家，天灾信使。于高等源石技艺、高能量法术释放等领域展现出了卓越的天赋"
+    },
+    {
+      "id": "draw-zhumi",
+      "src": "/myBlog_GH/images/zhumi1.png",
+      "alt": "朱米 立绘",
+      "note": "澄闪，罗德岛后勤干员，主要工作地点为罗德岛理发室，一般情况下不作为外勤干员派遣"
+    },
+    {
+      "id": "draw-xix",
+      "src": "/myBlog_GH/images/xix1.png",
+      "alt": "Xix 立绘",
+      "note": "迷迭香，她本人就和外表一样，是个小小的菲林姑娘"
+    }
+  ],
+  "musicCovers": [
+    {
+      "id": "cover-kon",
+      "src": "/myBlog_GH/images/kon1.png",
+      "alt": "Kon 封面",
+      "note": "《轻音少女》是由山田尚子执导、京都动画制作的校园音乐题材电视动画"
+    },
+    {
+      "id": "cover-touhong",
+      "src": "/myBlog_GH/images/touhong1.png",
+      "alt": "透红 封面",
+      "note": "莲子与玛艾露贝莉·赫恩一同经营着名为秘封俱乐部的社团，进行着在科学世纪探寻遍布四处的结界的活动"
+    },
+    {
+      "id": "cover-hanser",
+      "src": "/myBlog_GH/images/hanser1.png",
+      "alt": "Hanser 封面",
+      "note": "儿歌王、小天使。你管这种人叫小天使？"
+    },
+    {
+      "id": "cover-mili",
+      "src": "/myBlog_GH/images/Mili1.png",
+      "alt": "Mili 封面",
+      "note": "可以以后再说SAIKAI"
+    }
+  ],
+  "tracks": [
+    {
+      "id": "the-des-alizes",
+      "title": "The des Alizes",
+      "artist": "Foxtail-Grass Studio",
+      "src": "/myBlog_GH/audio/the-des-alizes.mp3",
+      "format": "MP3",
+      "sizeMB": 3.5
+    },
+    {
+      "id": "track-muljc82q-1-fi570",
+      "title": "Happy rainy day",
+      "artist": "百石元",
+      "src": "/myBlog_GH/audio/Happy rainy day.mp3",
+      "format": "MP3",
+      "sizeMB": 3.6
+    },
+    {
+      "id": "track-muljf3uw-2-9mc5x",
+      "title": "Winter night in a warm room",
+      "artist": "百石元",
+      "src": "/myBlog_GH/audio/Winter night in a warm room.mp3",
+      "format": "MP3",
+      "sizeMB": 3
+    },
+    {
+      "id": "track-muljhy3b-3-kh2nl",
+      "title": "SAIKAI",
+      "artist": "Mili",
+      "src": "/myBlog_GH/audio/SAIKAI.mp3",
+      "format": "MP3",
+      "sizeMB": 6.9
+    },
+    {
+      "id": "track-muljlkf1-4-5mwib",
+      "title": "二次元凶",
+      "artist": "hanser",
+      "src": "/myBlog_GH/audio/01-nijigen-kyou.mp3",
+      "format": "MP3",
+      "sizeMB": 6.9
+    },
+    {
+      "id": "track-muljn0ig-5-isurf",
+      "title": "中古店爱情",
+      "artist": "hanser",
+      "src": "/myBlog_GH/audio/02-chuko-ten-no-ai.mp3",
+      "format": "MP3",
+      "sizeMB": 8.1
+    },
+    {
+      "id": "track-muljopwv-6-nlcpf",
+      "title": "冲动是小天使",
+      "artist": "hanser",
+      "src": "/myBlog_GH/audio/03-shodo-wa-tenshi.mp3",
+      "format": "MP3",
+      "sizeMB": 7.4
+    },
+    {
+      "id": "track-muljq5za-7-lgl82",
+      "title": "那太重了",
+      "artist": "hanser",
+      "src": "/myBlog_GH/audio/04-sore-wa-omoi.mp3",
+      "format": "MP3",
+      "sizeMB": 8.8
+    }
+  ],
+  "projects": [
+    {
+      "id": "project-mv3xn797-1-w2c5a",
+      "title": "KubeIE",
+      "description": "MineCreaft KubeJS脚本可视化生成工具",
+      "link": "https://github.com/Bolun0721/KubeIE",
+      "cover": "/myBlog_GH/images/icon-mv3xlbaicon7.webp",
+      "coverAlt": "",
+      "note": ""
+    },
+    {
+      "id": "project-suika-1-9k4dm",
+      "title": "合成大冰球",
+      "description": "网页小游戏：丢下冰球，同级相撞合成更大的一颗，堆过红线判负。",
+      "link": "/suika",
+      "cover": "/myBlog_GH/images/icon-suika.webp",
+      "coverAlt": "合成大冰球：一堆由浅蓝到深蓝叠起来的冰球",
+      "note": ""
+    }
+  ]
+}
