@@ -61,60 +61,12 @@
       "sizeMB": 3.5
     },
     {
-      "id": "track-muljc82q-1-fi570",
-      "title": "Happy rainy day",
-      "artist": "百石元",
-      "src": "/myBlog_GH/audio/Happy rainy day.mp3",
-      "format": "MP3",
-      "sizeMB": 3.6
-    },
-    {
       "id": "track-muljf3uw-2-9mc5x",
       "title": "Winter night in a warm room",
       "artist": "百石元",
       "src": "/myBlog_GH/audio/Winter night in a warm room.mp3",
       "format": "MP3",
       "sizeMB": 3
-    },
-    {
-      "id": "track-muljhy3b-3-kh2nl",
-      "title": "SAIKAI",
-      "artist": "Mili",
-      "src": "/myBlog_GH/audio/SAIKAI.mp3",
-      "format": "MP3",
-      "sizeMB": 6.9
-    },
-    {
-      "id": "track-muljlkf1-4-5mwib",
-      "title": "二次元凶",
-      "artist": "hanser",
-      "src": "/myBlog_GH/audio/01-nijigen-kyou.mp3",
-      "format": "MP3",
-      "sizeMB": 6.9
-    },
-    {
-      "id": "track-muljn0ig-5-isurf",
-      "title": "中古店爱情",
-      "artist": "hanser",
-      "src": "/myBlog_GH/audio/02-chuko-ten-no-ai.mp3",
-      "format": "MP3",
-      "sizeMB": 8.1
-    },
-    {
-      "id": "track-muljopwv-6-nlcpf",
-      "title": "冲动是小天使",
-      "artist": "hanser",
-      "src": "/myBlog_GH/audio/03-shodo-wa-tenshi.mp3",
-      "format": "MP3",
-      "sizeMB": 7.4
-    },
-    {
-      "id": "track-muljq5za-7-lgl82",
-      "title": "那太重了",
-      "artist": "hanser",
-      "src": "/myBlog_GH/audio/04-sore-wa-omoi.mp3",
-      "format": "MP3",
-      "sizeMB": 8.8
     }
   ],
   "projects": [
